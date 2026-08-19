@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THE FEED — 2020s Pop Culture Archive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0b0b14;
+    --surface: #15151f;
+    --surface-2: #1c1c29;
+    --line: #2a2a3a;
+    --text: #f5f5f0;
+    --text-dim: #9797ab;
+
+    --music: #ff3dae;
+    --film: #3da9ff;
+    --internet: #d4ff3d;
+    --fashion: #ff9f3d;
+
+    --display: 'Archivo Black', sans-serif;
+    --body: 'Space Grotesk', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  html { scroll-behavior:smooth; }
+
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    line-height: 1.5;
+    overflow-x: hidden;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  ::selection{ background: var(--internet); color: var(--bg); }
+
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--internet);
+    outline-offset: 3px;
+  }
+
+  .wrap{
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  header{
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(11,11,20,0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  nav{
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    padding: 18px 24px;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+
+  .logo{
+    font-family: var(--display);
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+  }
+  .logo span{ color: var(--music); }
+
+  .nav-links{
+    display:flex;
+    gap: 28px;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .nav-links a{ color: var(--text-dim); transition: color .15s ease; position:relative; }
+  .nav-links a:hover{ color: var(--text); }
+
+  .nav-toggle{ display:none; background:none; border:1px solid var(--line); color:var(--text); font-family:var(--mono); font-size:0.75rem; padding:8px 12px; }
+
+  @media (max-width: 720px){
+    .nav-links{ display:none; }
+    .nav-toggle{ display:block; }
+  }
+
+  .hero{
+    padding: 90px 24px 60px;
+    max-width: 1180px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .eyebrow{
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--internet);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin-bottom: 22px;
+    display:flex;
+    align-items:center;
+    gap: 10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width: 8px; height: 8px;
+    background: var(--internet);
+    display:inline-block;
+    animation: blink 1.4s steps(2) infinite;
+  }
+  @keyframes blink{ 50%{ opacity: 0.15; } }
+
+  .glitch-title{
+    font-family: var(--display);
+    font-size: clamp(3rem, 11vw, 8rem);
+    line-height: 0.88;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    position: relative;
+    color: var(--text);
+  }
+  .glitch-title .layer{
+    position: relative;
+    display:block;
+  }
+  .glitch-title .layer::before,
+  .glitch-title .layer::after{
+    content: attr(data-text);
+    position: absolute;
+    top:0; left:0;
+    width:100%;
+    overflow:hidden;
+    clip-path: inset(0 0 0 0);
+  }
+  .glitch-title .layer::before{
+    color: var(--music);
+    animation: glitch-a 5s infinite linear;
+    mix-blend-mode: screen;
+  }
+  .glitch-title .layer::after{
+    color: var(--film);
+    animation: glitch-b 5s infinite linear;
+    mix-blend-mode: screen;
+  }
+  @keyframes glitch-a{
+    0%, 92%, 100%{ transform: translate(0,0); clip-path: inset(0 0 0 0); opacity: 0; }
+    93%{ transform: translate(-3px,1px); clip-path: inset(10% 0 60% 0); opacity: .9; }
+    95%{ transform: translate(3px,-1px); clip-path: inset(60% 0 5% 0); opacity: .9; }
+    97%{ transform: translate(-2px,0); clip-path: inset(30% 0 40% 0); opacity: .9; }
+  }
+  @keyframes glitch-b{
+    0%, 90%, 100%{ transform: translate(0,0); clip-path: inset(0 0 0 0); opacity: 0; }
+    91%{ transform: translate(3px,-1px); clip-path: inset(20% 0 50% 0); opacity: .9; }
+    94%{ transform: translate(-3px,1px); clip-path: inset(55% 0 10% 0); opacity: .9; }
+    98%{ transform: translate(2px,0); clip-path: inset(5% 0 70% 0); opacity: .9; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .glitch-title .layer::before, .glitch-title .layer::after{ animation: none; display:none; }
+    .eyebrow::before{ animation:none; }
+  }
+
+  .hero-sub{
+    margin-top: 28px;
+    max-width: 520px;
+    color: var(--text-dim);
+    font-size: 1.05rem;
+  }
+
+  .hero-meta{
+    display:flex;
+    gap: 32px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+  }
+  .hero-meta div{ font-family: var(--mono); }
+  .hero-meta .num{ font-size: 1.6rem; font-family: var(--display); display:block; }
+  .hero-meta .label{ font-size: 0.7rem; color: var(--text-dim); text-transform:uppercase; letter-spacing:0.08em; }
+
+  .ticker-band{
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: var(--surface);
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 14px 0;
+  }
+  .ticker-track{
+    display: inline-flex;
+    animation: scroll-ticker 32s linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce){ .ticker-track{ animation-duration: 90s; } }
+  .ticker-track span{
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0 24px;
+    color: var(--text-dim);
+    display:flex;
+    align-items:center;
+    gap: 24px;
+  }
+  .ticker-track span::after{ content:"◆"; font-size: 0.6rem; color: var(--internet); }
+  @keyframes scroll-ticker{
+    from{ transform: translateX(0); }
+    to{ transform: translateX(-50%); }
+  }
+
+  .section{ padding: 90px 24px; max-width: 1180px; margin: 0 auto; }
+  .section-head{
+    display:flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 44px;
+    gap: 16px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 20px;
+  }
+  .section-head h2{
+    font-family: var(--display);
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    text-transform: uppercase;
+  }
+  .section-tag{
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 6px 14px;
+    border: 1px solid currentColor;
+  }
+
+  .music .section-tag{ color: var(--music); }
+  .film .section-tag{ color: var(--film); }
+  .internet .section-tag{ color: var(--internet); }
+  .fashion .section-tag{ color: var(--fashion); }
+
+  .grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 900px){ .grid{ grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 600px){ .grid{ grid-template-columns: 1fr; } }
+
+  .card{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    padding: 26px;
+    display:flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: transform .18s ease, border-color .18s ease;
+  }
+  .card:hover{ transform: translateY(-4px); }
+
+  .music .card:hover{ border-color: var(--music); }
+  .film .card:hover{ border-color: var(--film); }
+  .internet .card:hover{ border-color: var(--internet); }
+  .fashion .card:hover{ border-color: var(--fashion); }
+
+  .card .chip{
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--bg);
+    padding: 3px 9px;
+    width: fit-content;
+  }
+  .music .chip{ background: var(--music); }
+  .film .chip{ background: var(--film); }
+  .internet .chip{ background: var(--internet); }
+  .fashion .chip{ background: var(--fashion); }
+
+  .card h3{
+    font-family: var(--body);
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+  .card p{ color: var(--text-dim); font-size: 0.92rem; }
+  .card .meta{
+    margin-top: auto;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    display:flex;
+    justify-content: space-between;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+  }
+
+  .card.feature{ grid-column: span 2; }
+  @media (max-width: 900px){ .card.feature{ grid-column: span 2; } }
+  @media (max-width: 600px){ .card.feature{ grid-column: span 1; } }
+  .card.feature h3{ font-size: 1.6rem; }
+
+  footer{
+    border-top: 1px solid var(--line);
+    padding: 50px 24px;
+    margin-top: 40px;
+  }
+  .footer-inner{
+    max-width: 1180px;
+    margin: 0 auto;
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  footer p{ color: var(--text-dim); font-family: var(--mono); font-size: 0.78rem; }
+  .footer-links{ display:flex; gap:20px; font-family: var(--mono); font-size: 0.78rem; }
+  .footer-links a{ color: var(--text-dim); }
+  .footer-links a:hover{ color: var(--text); }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">THE<span>·</span>FEED</div>
+    <div class="nav-links">
+      <a href="#music">Music</a>
+      <a href="#film">Film &amp; TV</a>
+      <a href="#internet">Internet</a>
+      <a href="#fashion">Fashion</a>
+    </div>
+    <button class="nav-toggle" aria-label="Menu">MENU</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <p class="eyebrow">Archiving the decade, one scroll at a time</p>
+  <h1 class="glitch-title">
+    <span class="layer" data-text="2020s">2020s</span>
+    <span class="layer" data-text="ON REPEAT">ON REPEAT</span>
+  </h1>
+  <p class="hero-sub">A running record of the music, shows, memes, and moments that defined how we scrolled, streamed, and dressed through the decade so far.</p>
+  <div class="hero-meta">
+    <div><span class="num">01</span><span class="label">Music</span></div>
+    <div><span class="num">02</span><span class="label">Film &amp; TV</span></div>
+    <div><span class="num">03</span><span class="label">Internet</span></div>
+    <div><span class="num">04</span><span class="label">Fashion</span></div>
+  </div>
+</section>
+
+<div class="ticker-band">
+  <div class="ticker-track">
+    <span>Barbenheimer</span>
+    <span>Eras Tour</span>
+    <span>Brainrot</span>
+    <span>Y2K Revival</span>
+    <span>Streaming Wars</span>
+    <span>Core-core</span>
+    <span>AI Everything</span>
+    <span>Demure</span>
+    <span>Barbenheimer</span>
+    <span>Eras Tour</span>
+    <span>Brainrot</span>
+    <span>Y2K Revival</span>
+    <span>Streaming Wars</span>
+    <span>Core-core</span>
+    <span>AI Everything</span>
+    <span>Demure</span>
+  </div>
+</div>
+
+<section class="section music" id="music">
+  <div class="section-head">
+    <h2>Music</h2>
+    <span class="section-tag">Category 01</span>
+  </div>
+  <div class="grid">
+    <article class="card feature">
+      <span class="chip">Headline</span>
+      <h3>Replace with your lead story</h3>
+      <p>Short summary of the piece — an album, an era, a tour, a genre moment. Two sentences is plenty.</p>
+      <div class="meta"><span>Author</span><span>Date</span></div>
+    </article>
+    <article class="card">
+      <span class="chip">Album</span>
+      <h3>Card title</h3>
+      <p>One or two lines of supporting text for this entry.</p>
+      <div class="meta"><span>Tag</span><span>Date</span></div>
+    </article>
+    <article class="card">
+      <span class="chip">Genre</span>
+      <h3>Card title</h3>
+      <p>One or two lines of supporting text for this entry.</p>
+      <div class="meta"><span>Tag</span><span>Date</span></div>
+    </article>
+  </div>
+</section>
+
+<section class="section film" id="film">
+  <div class="section-head">
+    <h2>Film &amp; TV</h2>
+    <span class="section-tag">Category 02</span>
+  </div>
+  <div class="grid">
+    <article class="card">
+      <span class="chip">Streaming</span>
+      <h3>Card title</h3>
+      <p>One or two lines of supporting text for this entry.</p>
+      <div class="meta"><span>Tag</span><span>Date</span></div>
+    </article>
+    <article class="card feature">
+      <span class="chip">Box Office</span>
+      <h3>Replace with your lead story</h3>
+      <p>Short summary of the piece — a release, a franchise, a cultural moment at the box office.</p>
+      <div class="meta"><span>Author</span><span>Date</span></div>
+    </article>
+    <article class="card">
+      <span class="chip">Series</span>
+      <h3>Card title</h3>
+      <p>One or two lines of supporting text for this entry.</p>
+      <div class="meta"><span>Tag</span><span>Date</span></div>
+    </article>
+  </div>
+</section>
+
+<section class="section internet" id="internet">
+  <div class="section-head">
+    <h2>Internet &amp; Memes</h2>
+    <span class="section-tag">Category 03</span>
+  </div>
+  <div class="grid">
+    <article class="card">
+      <span class="chip">Meme</span>
+      <h3>Card title</h3>
+      <p>One or two lines of supporting text for this entry.</p>
+      <div class="meta"><span>Tag</span><span>Date</span></div>
+    </article>
+    <article class="card">
+      <span class="chip">Trend</span>
+      <h3>Card title</h3>
+      <p>One or two lines of supporting text for this entry.</p>
+      <div class="meta"><span>Tag</span><span>Date</span></div>
+    </article>
+    <article class="card feature">
+      <span class="chip">Platform</span>
+      <h3>Replace with your lead story</h3>
+      <p>Short summary of the piece — a platform shift, a viral moment, a slang term that took over.</p>
+      <div class="meta"><span>Author</span><span>Date</span></div>
+    </article>
+  </div>
+</section>
+
+<section class="section fashion" id="fashion">
+  <div class="section-head">
+    <h2>Fashion &amp; Style</h2>
+    <span class="section-tag">Category 04</span>
+  </div>
+  <div class="grid">
+    <article class="card feature">
+      <span class="chip">Runway</span>
+      <h3>Replace with your lead story</h3>
+      <p>Short summary of the piece — a designer, a silhouette, a revival that came back around.</p>
+      <div class="meta"><span>Author</span><span>Date</span></div>
+    </article>
+    <article class="card">
+      <span class="chip">Trend</span>
+      <h3>Card title</h3>
+      <p>One or two lines of supporting text for this entry.</p>
+      <div class="meta"><span>Tag</span><span>Date</span></div>
+    </article>
+    <article class="card">
+      <span class="chip">Style</span>
+      <h3>Card title</h3>
+      <p>One or two lines of supporting text for this entry.</p>
+      <div class="meta"><span>Tag</span><span>Date</span></div>
+    </article>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <p>&copy; 2026 THE FEED — built for GitHub Pages</p>
+    <div class="footer-links">
+      <a href="#music">Music</a>
+      <a href="#film">Film &amp; TV</a>
+      <a href="#internet">Internet</a>
+      <a href="#fashion">Fashion</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
