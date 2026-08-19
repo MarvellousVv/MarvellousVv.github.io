@@ -20,8 +20,8 @@
 <div class="cookie-banner" id="cookieBanner">
   <p>We use cookies to improve your experience on this site. Do you accept?</p>
   <div class="cookie-buttons">
-    <button class="cookie-yes" id="cookieYes">Yes</button>
-    <button class="cookie-no" id="cookieNo">No</button>
+    <button id="cookieYes">Yes</button>
+    <button id="cookieNo">No</button>
   </div>
 </div>
  
@@ -233,6 +233,10 @@
     box-shadow: 0 -4px 12px rgba(0,0,0,0.25);
   }
 
+  .cookie-banner.hidden {
+    display: none;
+  }
+
   .cookie-banner p {
     margin: 0;
     font-size: 0.95rem;
@@ -253,27 +257,23 @@
     cursor: pointer;
   }
 
-  .cookie-yes {
-    background: #ffffff;
+   #cookieYes {
+    background: white;
     color: #2b2140;
   }
 
-  .cookie-yes:hover {
+  #cookieYes:hover {
     background: #e0d9ee;
   }
 
-  .cookie-no {
+  #cookieNo {
     background: transparent;
     color: white;
-    border: 1px solid white !important;
+    border: 1px solid white;
   }
 
-  .cookie-no:hover {
+  #cookieNo:hover {
     background: rgba(255,255,255,0.1);
-  }
-
-  .cookie-banner.hidden {
-    display: none;
   }
 </style>
 </head>
