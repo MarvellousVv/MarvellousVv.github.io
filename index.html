@@ -16,7 +16,15 @@
     color: #222;
     line-height: 1.6;
   }
-
+ 
+<div class="cookie-banner" id="cookieBanner">
+  <p>We use cookies to improve your experience on this site. Do you accept?</p>
+  <div class="cookie-buttons">
+    <button class="cookie-yes" id="cookieYes">Yes</button>
+    <button class="cookie-no" id="cookieNo">No</button>
+  </div>
+</div>
+ 
   header {
     background: #2b2140;
     color: white;
@@ -208,6 +216,65 @@
     color: #555;
     font-size: 0.95rem;
   }
+   .cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #2b2140;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    z-index: 1000;
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.25);
+  }
+
+  .cookie-banner p {
+    margin: 0;
+    font-size: 0.95rem;
+    max-width: 500px;
+  }
+
+  .cookie-buttons {
+    display: flex;
+    gap: 12px;
+  }
+
+  .cookie-buttons button {
+    padding: 10px 22px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .cookie-yes {
+    background: #ffffff;
+    color: #2b2140;
+  }
+
+  .cookie-yes:hover {
+    background: #e0d9ee;
+  }
+
+  .cookie-no {
+    background: transparent;
+    color: white;
+    border: 1px solid white !important;
+  }
+
+  .cookie-no:hover {
+    background: rgba(255,255,255,0.1);
+  }
+
+  .cookie-banner.hidden {
+    display: none;
+  }
 </style>
 </head>
 <body>
@@ -341,6 +408,18 @@
     lightbox.classList.remove('active');
   });
 </script>
+<script>
+  const cookieBanner = document.getElementById('cookieBanner');
+  const cookieYes = document.getElementById('cookieYes');
+  const cookieNo = document.getElementById('cookieNo');
 
+  cookieYes.addEventListener('click', () => {
+    cookieBanner.classList.add('hidden');
+  });
+
+  cookieNo.addEventListener('click', () => {
+    cookieBanner.classList.add('hidden');
+  });
+</script>
 </body>
 </html>
